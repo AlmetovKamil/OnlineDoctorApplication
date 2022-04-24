@@ -11,9 +11,7 @@ public class Bronchitis extends Diagnosis {
     }
 
     public void initializeDoctorsAndTransitions() throws Exception {
-        if (this.getDoctors().size() == 0 || this.transitions.size() == 0) {
-            this.addDoctor("Sergey Ivanov");
-        }
+       this.addDoctor("Sergey Ivanov");
         transitions = new ArrayList<>(
                 Arrays.asList(
                         new SymptomTransition("Headache", getDiagnosisByName("ICP")),
