@@ -8,9 +8,7 @@ public class SARS extends Diagnosis {
     }
 
     public void initializeDoctorsAndTransitions() throws Exception {
-        if (this.getDoctors().size() == 0 || this.transitions.size() == 0) {
-            this.addDoctor("Mikhail Gorodetskiy");
-        }
+        this.addDoctor("Mikhail Gorodetskiy");
         transitions = new ArrayList<>();
     }
 }
