@@ -11,9 +11,7 @@ public class Sinusitis extends Diagnosis {
     }
 
     public void initializeDoctorsAndTransitions() throws Exception {
-        if (this.getDoctors().size() == 0 || this.transitions.size() == 0) {
-            addDoctor("Surabh Pall");
-        }
+        addDoctor("Surabh Pall");
         transitions = new ArrayList<>(
                 List.of(
                         new SymptomTransition("Headache", getDiagnosisByName("SARS"))
