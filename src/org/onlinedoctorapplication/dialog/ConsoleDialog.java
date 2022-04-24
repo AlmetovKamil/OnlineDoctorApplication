@@ -46,10 +46,10 @@ public class ConsoleDialog implements IDialog {
     }
 
     public Patient getUserInformation() throws Exception {
-        System.out.println("Enter your data in format 'name' 'surname' 'age'");
-        String name = scanner.next(), surname = scanner.next();
+        System.out.println("Enter your data in format 'surname' 'name' 'age'");
+        String surname = scanner.next(), name = scanner.next();
         int age = scanner.nextInt();
-        return new Patient(name, surname, age);
+        return new Patient(surname, name, age);
     }
 
     public String optionList(){
@@ -76,30 +76,47 @@ public class ConsoleDialog implements IDialog {
         Admin admin = new Admin(doctorApplication);
         boolean runningTrigger = true;
         while (runningTrigger) {
-            switch (optionList("Choose an action:\n1) Show doctors\n2) Show doctor's timetable\n3) Show doctors' timetables\n4) Change doctors timetable\n5)Add doctor to diagnosis\n6) Leave admin panel")){
+            switch (optionList("Choose an action:\n1) Show doctors\n2) Show doctor for diagnosis\n3) Set doctor's salary\n4) Show doctors' salaries\n5) Show doctor's timetable\n6) Show doctors' timetables\n7) Change doctors timetable\n8)Add doctor to diagnosis\n9)Show diagnosis info\n10) Leave admin panel")){
                 case "1":
                     System.out.println(admin.showAllDoctors());
                     break;
                 case "2":
-                    System.out.println(admin.showAllDoctors());
-                    System.out.println(admin.showTimeTable(optionListWithLine("Enter doctor full name: ")));
+                    scanner.nextLine();
+                    System.out.println(admin.showDoctorsForDiagnosis(optionListWithLine("Enter diagnosis: ")));
                     break;
                 case "3":
-                    System.out.println(admin.showAllTimeTables());
+                    System.out.println(admin.showDoctorsSalaries());
+                    scanner.nextLine();
+                    admin.setDoctorSalary(optionListWithLine("Enter doctor: "), Integer.parseInt(optionListWithLine("Enter new salary:")));
                     break;
                 case "4":
+                    System.out.println(admin.showDoctorsSalaries());
+                    break;
+                case "5":
+                    System.out.println(admin.showAllDoctors());
+                    scanner.nextLine();
+                    System.out.println(admin.showTimeTable(optionListWithLine("Enter doctor full name: ")));
+                    break;
+                case "6":
+                    System.out.println(admin.showAllTimeTables());
+                    break;
+                case "7":
                     System.out.println(admin.showAllTimeTables());
                     scanner.nextLine();
                     admin.changeTimeTable(optionListWithLine("Enter doctor full name: "), optionListWithLine("Enter new timetable: "));
                     System.out.println("Changes applied successfully");
                     break;
-                case "5":
+                case "8":
                     System.out.println(admin.showAllDoctors());
                     scanner.nextLine();
                     admin.addDoctorsToDiagnosis(optionListWithLine("Enter diagnosis: "), optionListWithLine("Enter doctor full name: "));
                     System.out.println("Changes applied successfully");
                     break;
-                case "6":
+                case "9":
+                    scanner.nextLine();
+                    System.out.println(admin.getDiagnosisInfo(optionListWithLine("Enter diagnosis: ")));
+                    break;
+                case "10":
                     runningTrigger = false;
                     break;
             }

@@ -5,6 +5,7 @@ import org.onlinedoctorapplication.Patient;
 public abstract class Doctor {
     protected String fullName;
     protected String speciality;
+    protected Integer salary = 40000;
     public String answerPatientQuestion(Patient patient, String question) {
         return "Doctor: Good question.";
     }
@@ -21,6 +22,14 @@ public abstract class Doctor {
 
     public void setTimeTable(String timeTable) {
         this.timeTable = timeTable;
+    }
+
+    public void setSalary(Integer salary) {
+        this.salary = salary;
+    }
+
+    public Integer getSalary() {
+        return salary;
     }
 
     public Doctor(String fullName) {

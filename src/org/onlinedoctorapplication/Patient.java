@@ -9,7 +9,7 @@ public class Patient {
     private int age;
     private Diagnosis lastDiagnosis;
 
-    public Patient(String name, String surname, int age) throws Exception {
+    public Patient(String surname, String name, int age) throws Exception {
         this.name = name;
         this.surname = surname;
         this.age = age;

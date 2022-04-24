@@ -2,6 +2,9 @@ package org.onlinedoctorapplication.staff;
 
 import org.onlinedoctorapplication.OnlineDoctorApplication;
 import org.onlinedoctorapplication.Patient;
+import org.onlinedoctorapplication.diagnoses.Diagnosis;
+
+import java.util.Map;
 
 public class Admin {
     private final OnlineDoctorApplication doctorApplication;
@@ -29,6 +32,24 @@ public class Admin {
         return res;
     }
 
+    public String showDoctorsSalaries(){
+        String res = "Doctors:\n";
+        for(Doctor doctor: doctorApplication.getDoctors().values())
+            res += doctor.getSpeciality() + " " + doctor.getFullName() + " " + doctor.getSalary() +"\n";
+        return res;
+    }
+
+    public String showDoctorsForDiagnosis(String diagnosis) throws Exception {
+        String res = "Doctors:\n";
+        if(doctorApplication.getDiagnosisHashMap().containsKey(diagnosis)) {
+            if(doctorApplication.getDiagnosisHashMap().get(diagnosis).getDoctors().size() != 0)
+                for(Doctor doctor: doctorApplication.getDiagnosisHashMap().get(diagnosis).getDoctors())
+                    res += doctor.getSpeciality() + " " + doctor.getFullName() + "\n";
+            else return "There are no specialists or diagnosis is not actual yet";
+        }  else throw new Exception("No such diagnosis");
+        return res;
+    }
+
     public String showAllTimeTables(){
         String res = "Timetables:\n";
         for(Doctor doctor: doctorApplication.getDoctors().values())
@@ -45,7 +66,23 @@ public class Admin {
             throw new Exception("No such diagnosis");
     }
 
-    public String GetPatientInformation(Patient patient) {
+    public void setDoctorSalary(String fullName, int salary) throws Exception {
+        if(doctorApplication.getDoctors().containsKey(fullName))
+            doctorApplication.getDoctors().get(fullName).setSalary(salary);
+        else throw new Exception("No such doctor");
+    }
+
+    public String getDiagnosisInfo(String diagnosisName) throws Exception {
+        if(doctorApplication.getDiagnosisHashMap().containsKey(diagnosisName))
+            if(doctorApplication.getDiagnosisHashMap().get(diagnosisName).getName().length() != 0)
+                return doctorApplication.getDiagnosisHashMap().get(diagnosisName).getName() + "\n" + showDoctorsForDiagnosis(diagnosisName);
+            else
+                return "Diagnosis is not actual now";
+        else
+            throw new Exception("No such diagnosis");
+    }
+
+    public String getPatientInformation(Patient patient) {
         String info = "Name:" + patient.getName() + " Surname: " + patient.getSurname();
         if(patient.getLastDiagnosis() != null) {
             info += "Diagnosis: " + patient.getLastDiagnosis().getName();
