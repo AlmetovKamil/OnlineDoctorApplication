@@ -11,9 +11,7 @@ public class ICP extends Diagnosis {
     }
 
     public void initializeDoctorsAndTransitions() throws Exception {
-        if (this.getDoctors().size() == 0 || this.transitions.size() == 0) {
-            this.addDoctor("Muwaffaq Imam");
-        }
+        this.addDoctor("Muwaffaq Imam");
 
         transitions = new ArrayList<>(
                 List.of(
