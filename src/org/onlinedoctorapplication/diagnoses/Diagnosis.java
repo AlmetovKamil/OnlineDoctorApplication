@@ -50,10 +50,11 @@ public abstract class Diagnosis {
         if (newDiagnosis != null) {
             newDiagnosis.setApplication(doctorApplication);
             doctorApplication.changeDiagnosis(newDiagnosis);
-            if(!initialized)
+            if(!newDiagnosis.initialized) {
                 newDiagnosis.initializeDoctorsAndTransitions();
+                newDiagnosis.initialized = true;
+            }
             newDiagnosis.update();
-            newDiagnosis.initialized = true;
             return true;
         }
         return false;

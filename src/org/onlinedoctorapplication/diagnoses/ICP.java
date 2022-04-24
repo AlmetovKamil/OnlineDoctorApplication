@@ -13,16 +13,11 @@ public class ICP extends Diagnosis {
         name = "Intracranial Pressure";
     }
 
-    public void initializeDoctors() throws Exception {
-        if(this.getDoctors().size() == 0){
-            this.addDoctor("Muwaffaq Imam");
-        }
-    }
-
     public void initializeDoctorsAndTransitions() throws Exception {
         if(this.getDoctors().size() == 0 || this.transitions.size() == 0){
             this.addDoctor("Muwaffaq Imam");
         }
+
         transitions = new ArrayList<>(
                 List.of(
                         new SymptomTransition("Sneezing",

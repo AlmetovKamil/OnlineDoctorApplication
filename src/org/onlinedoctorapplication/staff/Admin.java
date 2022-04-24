@@ -2,9 +2,6 @@ package org.onlinedoctorapplication.staff;
 
 import org.onlinedoctorapplication.OnlineDoctorApplication;
 import org.onlinedoctorapplication.Patient;
-import org.onlinedoctorapplication.diagnoses.Diagnosis;
-
-import java.util.Map;
 
 public class Admin {
     private final OnlineDoctorApplication doctorApplication;

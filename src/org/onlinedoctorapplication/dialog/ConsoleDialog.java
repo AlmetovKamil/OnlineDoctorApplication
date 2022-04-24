@@ -68,10 +68,17 @@ public class ConsoleDialog implements IDialog {
     }
 
     public void openAdminPanel(OnlineDoctorApplication doctorApplication) throws Exception {
-        printInformation("Enter your password: ");
-        if(!scanner.next().equals(password)) {
-            System.out.println("Wrong password");
-            return;
+        while (true) {
+            printInformation("Enter your password: ");
+            String enteredString = scanner.next();
+            if (enteredString.equals(password)) {
+                break;
+            } else if(enteredString.equals("Q")){
+                return;
+            }else {
+                System.out.println("Wrong password");
+                System.out.println("Try again. Enter Q if you want to leave");
+            }
         }
         Admin admin = new Admin(doctorApplication);
         boolean runningTrigger = true;
