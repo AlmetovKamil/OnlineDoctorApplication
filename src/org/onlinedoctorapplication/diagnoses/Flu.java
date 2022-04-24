@@ -1,15 +1,23 @@
 package org.onlinedoctorapplication.diagnoses;
 
 import org.onlinedoctorapplication.SymptomTransition;
-import org.onlinedoctorapplication.staff.Therapist;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Flu extends Diagnosis {
-    public Flu() {
+    public Flu() throws Exception {
         name = "Flu";
-        doctors.add(new Therapist("Nikita Kudasov"));
-        transitions = new ArrayList<>(List.of(new SymptomTransition("Cough", new SARS())));
+    }
+
+    public void initializeDoctorsAndTransitions() throws Exception {
+        if(this.getDoctors().size() == 0 || this.transitions.size() == 0){
+            this.addDoctor("Nikita Kudasov");
+        }
+        transitions = new ArrayList<>(
+                List.of(
+                        new SymptomTransition("Cough", getDiagnosisByName("SARS"))
+                )
+        );
     }
 }

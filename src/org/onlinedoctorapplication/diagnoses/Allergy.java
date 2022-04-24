@@ -5,12 +5,22 @@ import org.onlinedoctorapplication.staff.Allergoloc;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Allergy extends Diagnosis {
-    public Allergy(){
+    public Allergy() throws Exception {
         name = "Allergy";
-        doctors.add(new Allergoloc("Vladimir Zouev"));
-        transitions = new ArrayList<>(Arrays.asList(new SymptomTransition("Headache", new Flu()), new SymptomTransition("Cough", new Sinusitis())));
+    }
+
+    public void initializeDoctorsAndTransitions() throws Exception {
+        if(this.getDoctors().size() == 0 || this.transitions.size() == 0){
+            this.addDoctor("Vladimir Zouev");
+        }
+        transitions = new ArrayList<>(
+                Arrays.asList(new SymptomTransition("Headache", getDiagnosisByName("Flu")),
+                        new SymptomTransition("Cough", getDiagnosisByName("Sinusitis"))
+                )
+        );
     }
 }
 

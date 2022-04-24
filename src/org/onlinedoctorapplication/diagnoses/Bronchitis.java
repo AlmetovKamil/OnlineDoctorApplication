@@ -5,11 +5,22 @@ import org.onlinedoctorapplication.staff.Therapist;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Bronchitis extends Diagnosis {
-    public Bronchitis() {
+    public Bronchitis() throws Exception {
         name = "Bronchitis";
-        doctors.add(new Therapist("Sergey Ivanov"));
-        transitions = new ArrayList<>(Arrays.asList(new SymptomTransition("Headache", new ICP()), new SymptomTransition("Sneezing", new Sinusitis())));
+    }
+
+    public void initializeDoctorsAndTransitions() throws Exception {
+        if(this.getDoctors().size() == 0 || this.transitions.size() == 0){
+            this.addDoctor("Sergey Ivanov");
+        }
+        transitions = new ArrayList<>(
+                Arrays.asList(
+                        new SymptomTransition("Headache", getDiagnosisByName("ICP")),
+                        new SymptomTransition("Sneezing", getDiagnosisByName("Sinusitis"))
+                )
+        );
     }
 }

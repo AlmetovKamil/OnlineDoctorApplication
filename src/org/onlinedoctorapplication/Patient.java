@@ -9,11 +9,10 @@ public class Patient {
     private int age;
     private Diagnosis lastDiagnosis;
 
-    public Patient(String name, String surname, int age) {
+    public Patient(String name, String surname, int age) throws Exception {
         this.name = name;
         this.surname = surname;
         this.age = age;
-        this.lastDiagnosis = new Healthy();
     }
 
     public String getName() {

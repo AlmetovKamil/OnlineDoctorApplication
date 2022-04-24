@@ -4,6 +4,7 @@ import org.onlinedoctorapplication.Patient;
 
 public abstract class Doctor {
     protected String fullName;
+    protected String speciality;
     public String answerPatientQuestion(Patient patient, String question) {
         return "Doctor: Good question.";
     }
@@ -28,5 +29,9 @@ public abstract class Doctor {
 
     public String getFullName() {
         return fullName;
+    }
+
+    public String getSpeciality() {
+        return speciality;
     }
 }

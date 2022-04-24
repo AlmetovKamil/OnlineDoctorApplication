@@ -5,11 +5,22 @@ import org.onlinedoctorapplication.staff.Neurologist;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Migraine extends Diagnosis {
-    Migraine() {
+    public Migraine() throws Exception {
         name = "Migraine";
-        doctors.add(new Neurologist("Andrey Holodov"));
-        transitions = new ArrayList<>(Arrays.asList(new SymptomTransition("Sneezing", new Flu()), new SymptomTransition("Cough", new ICP())));
+    }
+
+    public void initializeDoctorsAndTransitions() throws Exception {
+        if(this.getDoctors().size() == 0 || this.transitions.size() == 0){
+            addDoctor("Andrey Holodov");
+        }
+        transitions = new ArrayList<>(
+                Arrays.asList(
+                        new SymptomTransition("Sneezing", getDiagnosisByName("Flu")),
+                        new SymptomTransition("Cough", getDiagnosisByName("ICP"))
+                )
+        );
     }
 }

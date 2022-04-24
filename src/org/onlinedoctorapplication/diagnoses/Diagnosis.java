@@ -6,30 +6,64 @@ import org.onlinedoctorapplication.dialog.IDialog;
 import org.onlinedoctorapplication.staff.Doctor;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public abstract class Diagnosis {
 
-    protected ArrayList<Doctor> doctors = new ArrayList<>();
-    private OnlineDoctorApplication doctorApplication;
+    private final ArrayList<Doctor> doctors = new ArrayList<>();
+    protected OnlineDoctorApplication doctorApplication;
     protected ArrayList<SymptomTransition> transitions;
     protected String name;
+    protected boolean initialized;
 
     public void setApplication(OnlineDoctorApplication app) {
         doctorApplication = app;
     }
 
     public void printMe(IDialog dialog) {
-        System.out.println("Your diagnosis is " + name);
+        dialog.printInformation("Your diagnosis is " + name);
     }
 
-    public boolean nextDiagnosis(IDialog dialog) {
+    public void addTransition(String symptom, String to) throws Exception{
+        if(doctorApplication.hasSymptom(symptom) && doctorApplication.hasDiagnosis(to)){
+            SymptomTransition newSymptomTransition = new SymptomTransition(symptom, getDiagnosisByName(to));
+            if(!transitions.contains(newSymptomTransition))
+                transitions.add(new SymptomTransition(symptom, getDiagnosisByName(to)));
+            else
+                throw new Exception("Symptom or Diagnosis does not exist");
+        }
+    }
+
+    public void addDoctor(String fullName) throws Exception {
+        if(doctorApplication.getDoctors().containsKey(fullName))
+            this.doctors.add(this.doctorApplication.getDoctors().get(fullName));
+        else
+            throw new Exception("No such doctor");
+    }
+
+    public Diagnosis getDiagnosisByName(String nameDiagnosis) {
+        return doctorApplication.getDiagnosisHashMap().get(nameDiagnosis);
+    }
+
+    public boolean nextDiagnosis(IDialog dialog) throws Exception {
         Diagnosis newDiagnosis = dialog.chooseSymptom(transitions);
         if (newDiagnosis != null) {
             newDiagnosis.setApplication(doctorApplication);
             doctorApplication.changeDiagnosis(newDiagnosis);
+            if(!initialized)
+                newDiagnosis.initializeDoctorsAndTransitions();
+            newDiagnosis.update();
+            newDiagnosis.initialized = true;
             return true;
         }
         return false;
+    }
+
+    public void update() throws Exception {
+        for(Map.Entry<Doctor, Diagnosis> doctorDiagnosisEntry: doctorApplication.getDoctorDiagnosisHashMap().entrySet()){
+            if(doctorDiagnosisEntry.getValue().name.equals(this.name) && !this.doctors.contains(doctorDiagnosisEntry.getKey().getFullName()))
+                addDoctor(doctorDiagnosisEntry.getKey().getFullName());
+        }
     }
 
     public String printDoctors(){
@@ -49,4 +83,6 @@ public abstract class Diagnosis {
     public String getName() {
         return name;
     }
+
+    public void initializeDoctorsAndTransitions() throws Exception {};
 }

@@ -6,17 +6,24 @@ import org.onlinedoctorapplication.staff.Therapist;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Healthy extends Diagnosis {
-    public Healthy() {
+    public Healthy() throws Exception {
         name = "Healthy person";
-        doctors.add(new Therapist("Adil Khan"));
-        transitions = new ArrayList<>(
-                Arrays.asList(
-                        new SymptomTransition("Cough", new Bronchitis()),
-                        new SymptomTransition("Headache", new Migraine()),
-                        new SymptomTransition("Sneezing", new Allergy()))
-        );
     }
 
+
+    public void initializeDoctorsAndTransitions() throws Exception {
+        if(this.getDoctors().size() == 0 || this.transitions.size() == 0){
+            this.addDoctor("Adil Khan");
+        }
+        transitions = new ArrayList<>(
+                Arrays.asList(
+                        new SymptomTransition("Cough", getDiagnosisByName("Bronchitis")),
+                        new SymptomTransition("Headache", getDiagnosisByName("Migraine")),
+                        new SymptomTransition("Sneezing", getDiagnosisByName("Allergy"))
+                )
+        );
+    }
 }
