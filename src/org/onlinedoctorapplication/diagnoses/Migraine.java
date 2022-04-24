@@ -11,9 +11,7 @@ public class Migraine extends Diagnosis {
     }
 
     public void initializeDoctorsAndTransitions() throws Exception {
-        if (this.getDoctors().size() == 0 || this.transitions.size() == 0) {
-            addDoctor("Andrey Holodov");
-        }
+        addDoctor("Andrey Holodov");
         transitions = new ArrayList<>(
                 Arrays.asList(
                         new SymptomTransition("Sneezing", getDiagnosisByName("Flu")),
