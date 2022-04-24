@@ -12,9 +12,7 @@ public class Healthy extends Diagnosis {
 
 
     public void initializeDoctorsAndTransitions() throws Exception {
-        if (this.getDoctors().size() == 0 || this.transitions.size() == 0) {
-            this.addDoctor("Adil Khan");
-        }
+        this.addDoctor("Adil Khan");
         transitions = new ArrayList<>(
                 Arrays.asList(
                         new SymptomTransition("Cough", getDiagnosisByName("Bronchitis")),
