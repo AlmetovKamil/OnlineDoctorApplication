@@ -1,12 +1,11 @@
 package org.onlinedoctorapplication;
 
 import org.onlinedoctorapplication.diagnoses.Diagnosis;
-import org.onlinedoctorapplication.diagnoses.Healthy;
 
 public class Patient {
-    private String name;
-    private String surname;
-    private int age;
+    private final String name;
+    private final String surname;
+    private final int age;
     private Diagnosis lastDiagnosis;
 
     public Patient(String surname, String name, int age) throws Exception {

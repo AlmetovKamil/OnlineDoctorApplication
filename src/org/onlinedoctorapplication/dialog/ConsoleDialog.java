@@ -52,17 +52,17 @@ public class ConsoleDialog implements IDialog {
         return new Patient(surname, name, age);
     }
 
-    public String optionList(){
+    public String optionList() {
         System.out.println("Please, choose that you want:\n1) Get diagnosis\n2) Admin panel\n3) Ask a question to doctor\n4) Book an appointment with a doctor\n5) Quit");
         return scanner.next();
     }
 
-    public String optionListWithLine(String options){
+    public String optionListWithLine(String options) {
         System.out.println(options);
         return scanner.nextLine();
     }
 
-    public String optionList(String options){
+    public String optionList(String options) {
         System.out.println(options);
         return scanner.next();
     }
@@ -73,9 +73,9 @@ public class ConsoleDialog implements IDialog {
             String enteredString = scanner.next();
             if (enteredString.equals(password)) {
                 break;
-            } else if(enteredString.equals("Q")){
+            } else if (enteredString.equals("Q")) {
                 return;
-            }else {
+            } else {
                 System.out.println("Wrong password");
                 System.out.println("Try again. Enter Q if you want to leave");
             }
@@ -83,7 +83,7 @@ public class ConsoleDialog implements IDialog {
         Admin admin = new Admin(doctorApplication);
         boolean runningTrigger = true;
         while (runningTrigger) {
-            switch (optionList("Choose an action:\n1) Show doctors\n2) Show doctor for diagnosis\n3) Set doctor's salary\n4) Show doctors' salaries\n5) Show doctor's timetable\n6) Show doctors' timetables\n7) Change doctors timetable\n8)Add doctor to diagnosis\n9)Show diagnosis info\n10) Leave admin panel")){
+            switch (optionList("Choose an action:\n1) Show doctors\n2) Show doctor for diagnosis\n3) Set doctor's salary\n4) Show doctors' salaries\n5) Show doctor's timetable\n6) Show doctors' timetables\n7) Change doctors timetable\n8)Add doctor to diagnosis\n9)Show diagnosis info\n10) Leave admin panel")) {
                 case "1":
                     System.out.println(admin.showAllDoctors());
                     break;

@@ -11,7 +11,7 @@ public class Flu extends Diagnosis {
     }
 
     public void initializeDoctorsAndTransitions() throws Exception {
-        if(this.getDoctors().size() == 0 || this.transitions.size() == 0){
+        if (this.getDoctors().size() == 0 || this.transitions.size() == 0) {
             this.addDoctor("Nikita Kudasov");
         }
         transitions = new ArrayList<>(
