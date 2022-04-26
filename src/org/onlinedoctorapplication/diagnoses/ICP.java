@@ -12,12 +12,8 @@ public class ICP extends Diagnosis {
 
     public void initializeDoctorsAndTransitions() throws Exception {
         this.addDoctor("Muwaffaq Imam");
-
         transitions = new ArrayList<>(
-                List.of(
-                        new SymptomTransition("Sneezing",
-                                getDiagnosisByName("SARS"))
-                )
+                List.of(new SymptomTransition("Sneezing", getDiagnosisByName("SARS")))
         );
     }
 }

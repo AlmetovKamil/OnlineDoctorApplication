@@ -10,7 +10,6 @@ public class Healthy extends Diagnosis {
         name = "Healthy person";
     }
 
-
     public void initializeDoctorsAndTransitions() throws Exception {
         this.addDoctor("Adil Khan");
         transitions = new ArrayList<>(

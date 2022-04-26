@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public abstract class Diagnosis {
-
     private final ArrayList<Doctor> doctors = new ArrayList<>();
     protected OnlineDoctorApplication doctorApplication;
     protected ArrayList<SymptomTransition> transitions;
@@ -27,18 +26,20 @@ public abstract class Diagnosis {
     public void addTransition(String symptom, String to) throws Exception {
         if (doctorApplication.hasSymptom(symptom) && doctorApplication.hasDiagnosis(to)) {
             SymptomTransition newSymptomTransition = new SymptomTransition(symptom, getDiagnosisByName(to));
-            if (!transitions.contains(newSymptomTransition))
+            if (!transitions.contains(newSymptomTransition)) {
                 transitions.add(new SymptomTransition(symptom, getDiagnosisByName(to)));
-            else
+            } else {
                 throw new Exception("Symptom or Diagnosis does not exist");
+            }
         }
     }
 
     public void addDoctor(String fullName) throws Exception {
-        if (doctorApplication.getDoctors().containsKey(fullName))
+        if (doctorApplication.getDoctors().containsKey(fullName)) {
             this.doctors.add(this.doctorApplication.getDoctors().get(fullName));
-        else
+        } else {
             throw new Exception("No such doctor");
+        }
     }
 
     public Diagnosis getDiagnosisByName(String nameDiagnosis) {
@@ -62,8 +63,10 @@ public abstract class Diagnosis {
 
     public void update() throws Exception {
         for (Map.Entry<Doctor, Diagnosis> doctorDiagnosisEntry : doctorApplication.getDoctorDiagnosisHashMap().entrySet()) {
-            if (doctorDiagnosisEntry.getValue().name.equals(this.name) && !this.doctors.contains(doctorDiagnosisEntry.getKey().getFullName()))
+            if (doctorDiagnosisEntry.getValue().name.equals(this.name) &&
+                    !this.doctors.contains(doctorDiagnosisEntry.getKey().getFullName())) {
                 addDoctor(doctorDiagnosisEntry.getKey().getFullName());
+            }
         }
     }
 

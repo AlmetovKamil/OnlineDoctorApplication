@@ -29,7 +29,7 @@ public class OnlineDoctorApplication {
         }};
         this.doctors = new HashMap<>(16) {{
             put("Nikita Kudasov", new Therapist("Nikita Kudasov"));
-            put("Vladimir Zouev", new Allergoloc("Vladimir Zouev"));
+            put("Vladimir Zouev", new Allergist("Vladimir Zouev"));
             put("Andrey Holodov", new Neurologist("Andrey Holodov"));
             put("Mikhail Gorodetskiy", new Therapist("Mikhail Gorodetskiy"));
             put("Surabh Pall", new Otolaryngologist("Surabh Pall"));
@@ -61,8 +61,9 @@ public class OnlineDoctorApplication {
 
     public void defineSymptoms() throws Exception {
         boolean haveMoreSymptoms = true;
-        while (haveMoreSymptoms)
+        while (haveMoreSymptoms) {
             haveMoreSymptoms = state.nextDiagnosis(dialog);
+        }
         showDiagnosis();
         patient.setLastDiagnosis(state);
         dialog.printInformation(state.printDoctors());

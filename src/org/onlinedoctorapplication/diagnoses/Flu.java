@@ -13,9 +13,7 @@ public class Flu extends Diagnosis {
     public void initializeDoctorsAndTransitions() throws Exception {
         this.addDoctor("Nikita Kudasov");
         transitions = new ArrayList<>(
-                List.of(
-                        new SymptomTransition("Cough", getDiagnosisByName("SARS"))
-                )
+                List.of(new SymptomTransition("Cough", getDiagnosisByName("SARS")))
         );
     }
 }
