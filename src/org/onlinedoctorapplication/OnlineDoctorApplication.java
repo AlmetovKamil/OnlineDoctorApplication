@@ -47,14 +47,14 @@ public class OnlineDoctorApplication {
      */
     public OnlineDoctorApplication(Patient patient, IDialog dialog) throws Exception {
         this.diagnosisHashMap = new HashMap<>(16) {{
-            put("Flu", new Flu());
-            put("Allergy", new Allergy());
-            put("Bronchitis", new Bronchitis());
-            put("Healthy", new Healthy());
-            put("ICP", new ICP());
-            put("Migraine", new Migraine());
-            put("SARS", new SARS());
-            put("Sinusitis", new Sinusitis());
+            put("flu", new Flu());
+            put("allergy", new Allergy());
+            put("bronchitis", new Bronchitis());
+            put("healthy", new Healthy());
+            put("icp", new ICP());
+            put("migraine", new Migraine());
+            put("sars", new SARS());
+            put("sinusitis", new Sinusitis());
         }};
         this.doctors = new HashMap<>(16) {{
             put("Nikita Kudasov", new Therapist("Nikita Kudasov"));
