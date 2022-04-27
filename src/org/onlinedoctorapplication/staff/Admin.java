@@ -82,7 +82,7 @@ public class Admin {
      */
     public String showDoctorsForDiagnosis(String diagnosis) throws Exception {
         String res = "Doctors:\n";
-        if (doctorApplication.getDiagnosisHashMap().containsKey(diagnosis)) {
+        if (doctorApplication.getDiagnosisHashMap().containsKey(diagnosis.toLowerCase())) {
             if (doctorApplication.getDiagnosisHashMap().get(diagnosis).getDoctors().size() != 0) {
                 for (Doctor doctor : doctorApplication.getDiagnosisHashMap().get(diagnosis).getDoctors()) {
                     res += doctor.getSpeciality() + " " + doctor.getFullName() + "\n";
