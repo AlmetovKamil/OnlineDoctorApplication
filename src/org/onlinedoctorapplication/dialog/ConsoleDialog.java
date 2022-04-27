@@ -72,12 +72,12 @@ public class ConsoleDialog implements IDialog {
 
     public String optionListWithLine(String options) {
         System.out.println(options);
-        return scanner.nextLine();
+        return scanner.nextLine().toLowerCase();
     }
 
     public String optionList(String options) {
         System.out.println(options);
-        return scanner.next();
+        return scanner.next().toLowerCase();
     }
 
     public void openAdminPanel(OnlineDoctorApplication doctorApplication) throws Exception {
