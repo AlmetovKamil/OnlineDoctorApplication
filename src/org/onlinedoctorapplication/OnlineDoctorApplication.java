@@ -67,7 +67,7 @@ public class OnlineDoctorApplication {
             put("Muwaffaq Imam", new Neurologist("Muwaffaq Imam"));
         }};
         this.doctorDiagnosisHashMap = new HashMap<>(16);
-        this.state = this.diagnosisHashMap.get("Healthy");
+        this.state = this.diagnosisHashMap.get("healthy");
         this.state.setApplication(this);
         this.state.initializeDoctorsAndTransitions();
         this.patient = patient;
