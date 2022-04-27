@@ -5,6 +5,9 @@ import org.onlinedoctorapplication.SymptomTransition;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that represents Flu diagnosis (one of the states)
+ */
 public class Flu extends Diagnosis {
     public Flu() throws Exception {
         name = "Flu";

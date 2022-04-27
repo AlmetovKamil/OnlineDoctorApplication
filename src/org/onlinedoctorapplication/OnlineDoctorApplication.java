@@ -7,15 +7,44 @@ import org.onlinedoctorapplication.staff.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Class that represents main application. It's the context in the State pattern
+ */
 public class OnlineDoctorApplication {
+    /**
+     * List of all  available symptoms
+     */
     private final ArrayList<String> symptoms;
+    /**
+     * Map of transitions. Key - symptom's name, value - endpoint of transition (diagnosis)
+     */
     private final HashMap<String, Diagnosis> diagnosisHashMap;
+    /**
+     * Map of doctors. Key - doctor's name, value, reference to Doctor class
+     */
     private final HashMap<String, Doctor> doctors;
+    /**
+     * Map, where key - doctor, value, diagnosis that is the speciality of the doctor
+     */
     private final HashMap<Doctor, Diagnosis> doctorDiagnosisHashMap;
+    /**
+     * Patient that uses that application (Each user uses their own instance of application)
+     */
     private final Patient patient;
+    /**
+     * Dialog that establishes communication between patient and app
+     */
     private final IDialog dialog;
+    /**
+     * Current state of context (current diagnosis)
+     */
     private Diagnosis state;
 
+    /**
+     * Constructor that specifies lists of diagnosis, doctors, symptoms and initializes all necessary fields
+     * @param patient patient for whom the app instance is created
+     * @param dialog specific version of dialog that will be used in that app instance (e.g. ConsoleDialog)
+     */
     public OnlineDoctorApplication(Patient patient, IDialog dialog) throws Exception {
         this.diagnosisHashMap = new HashMap<>(16) {{
             put("Flu", new Flu());
@@ -55,10 +84,17 @@ public class OnlineDoctorApplication {
         this.state = state;
     }
 
+    /**
+     * Method that prints information about current diagnosis using dialog
+     */
     public void showDiagnosis() {
         state.printMe(dialog);
     }
 
+    /**
+     * Method that asks user about their symptoms using dialog. After user finishes choosing their symptoms,
+     * method prints all doctors that are the specialists in that sphere
+     */
     public void defineSymptoms() throws Exception {
         boolean haveMoreSymptoms = true;
         while (haveMoreSymptoms) {
@@ -69,22 +105,38 @@ public class OnlineDoctorApplication {
         dialog.printInformation(state.printDoctors());
     }
 
+    /**
+     * Method that allows to make an appointment with a doctor
+     */
     public void bookingDoctor() {
         dialog.printInformation("Choose the doctor for booking (write the number) : ");
         int j = Integer.parseInt(dialog.optionList(patient.getLastDiagnosis().printDoctors())) - 1;
         dialog.printInformation("You booked " + patient.getLastDiagnosis().getDoctors().get(j).getFullName() + " in 10AM.");
     }
 
+    /**
+     * Method that allows to communicate with a doctor
+     */
     public void discussionWithDoctor() {
         dialog.printInformation("Choose the doctor for conversation (write the number) : ");
         int j = Integer.parseInt(dialog.optionList(patient.getLastDiagnosis().printDoctors())) - 1;
         dialog.askQuestion(patient, patient.getLastDiagnosis().getDoctors().get(j));
     }
 
+    /**
+     * Method that gives information whether the patient has the symptom
+     * @param symptom name of checking symptom
+     * @return true is the patient has the symptom
+     */
     public boolean hasSymptom(String symptom) {
         return symptoms.contains(symptom);
     }
 
+    /**
+     * Method that gives information whether the patient has the symptom
+     * @param diagnosis name of checking diagnosis
+     * @return true is the patient has the diagnosis
+     */
     public boolean hasDiagnosis(String diagnosis) {
         return diagnosisHashMap.containsKey(diagnosis);
     }

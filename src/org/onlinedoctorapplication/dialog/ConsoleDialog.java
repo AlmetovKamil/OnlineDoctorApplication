@@ -10,9 +10,18 @@ import org.onlinedoctorapplication.staff.Doctor;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Class that implements IDialog using console for interaction.
+ */
 public class ConsoleDialog implements IDialog {
 
+    /**
+     * Scanner is used to receive responses from users
+     */
     private final Scanner scanner = new Scanner(System.in);
+    /**
+     * admin password
+     */
     private final String password = "12345";
 
     @Override
@@ -52,7 +61,12 @@ public class ConsoleDialog implements IDialog {
     }
 
     public String optionList() {
-        System.out.println("Please, choose that you want:\n1) Get diagnosis\n2) Admin panel\n3) Ask a question to doctor\n4) Book an appointment with a doctor\n5) Quit");
+        System.out.println("Please, choose that you want:\n" +
+                "1) Get diagnosis\n" +
+                "2) Admin panel\n" +
+                "3) Ask a question to doctor\n" +
+                "4) Book an appointment with a doctor\n" +
+                "5) Quit");
         return scanner.next();
     }
 

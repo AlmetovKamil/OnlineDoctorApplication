@@ -5,6 +5,9 @@ import org.onlinedoctorapplication.SymptomTransition;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Class that represents Allergy diagnosis (one of the states)
+ */
 public class Allergy extends Diagnosis {
     public Allergy() throws Exception {
         name = "Allergy";

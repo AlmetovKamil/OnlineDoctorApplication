@@ -5,6 +5,9 @@ import org.onlinedoctorapplication.SymptomTransition;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Class that represents Bronchitis diagnosis (one of the states)
+ */
 public class Bronchitis extends Diagnosis {
     public Bronchitis() throws Exception {
         name = "Bronchitis";

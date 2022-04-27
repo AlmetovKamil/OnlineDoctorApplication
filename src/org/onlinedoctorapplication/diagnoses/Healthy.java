@@ -5,6 +5,9 @@ import org.onlinedoctorapplication.SymptomTransition;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Class that represents Healthy diagnosis (one of the states)
+ */
 public class Healthy extends Diagnosis {
     public Healthy() throws Exception {
         name = "Healthy person";

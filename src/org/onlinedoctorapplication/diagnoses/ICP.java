@@ -5,6 +5,9 @@ import org.onlinedoctorapplication.SymptomTransition;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that represents ICP diagnosis (one of the states)
+ */
 public class ICP extends Diagnosis {
     public ICP() throws Exception {
         name = "Intracranial Pressure";
