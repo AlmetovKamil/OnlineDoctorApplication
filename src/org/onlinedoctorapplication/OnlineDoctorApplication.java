@@ -74,7 +74,7 @@ public class OnlineDoctorApplication {
         this.patient.setLastDiagnosis(this.state);
         this.dialog = dialog;
         this.symptoms = new ArrayList<>() {{
-            add("Cough");
+            add("Сough");
             add("Headache");
             add("Sneezing");
         }};
